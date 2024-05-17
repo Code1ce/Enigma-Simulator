@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class RotorsValue {
 
-    private ArrayList<String> RotorsValue = new ArrayList<>();
+    private final ArrayList<String> RotorsValue = new ArrayList<>();
 
     public RotorsValue() {
         RotorsValue.add("EKMFLGDQVZNTOWYHXUSPAIBRCJ");
