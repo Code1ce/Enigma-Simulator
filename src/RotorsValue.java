@@ -1,23 +1,28 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class RotorsValue {
 
-    private final ArrayList<String> RotorsValue = new ArrayList<>();
+    private static final ArrayList<String> rotorsValue = new ArrayList<>();
 
-    public RotorsValue() {
-        RotorsValue.add("EKMFLGDQVZNTOWYHXUSPAIBRCJ");
-        RotorsValue.add("AJDKSIRUXBLHWTMCQGZNPYFVOE");
-        RotorsValue.add("BDFHJLCPRTXVZNYEIWGAKMUSQO");
-        RotorsValue.add("ESOVPZJAYQUIRHXLNFTGKDCMWB");
-        RotorsValue.add("VZBRGITYUPSDNHLXAWMJQOFECK");
-        RotorsValue.add("JPGVOUMFYQBENHZRDKASXLICTW");
-        RotorsValue.add("NZJHGRCXMYSWBOUFAIVLPEKQDT");
-        RotorsValue.add("FKQHTLXOCBJSPDZRAMEWNIUYGV");
-        RotorsValue.add("LEYJVCNIXWPBQMDRTAKZGFUHOS");
-        RotorsValue.add("FSOKANUERHMBTIYCWLQPZXVGJD");
+    private static String[] rv = {
+        "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+        "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+        "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+        "ESOVPZJAYQUIRHXLNFTGKDCMWB",
+        "VZBRGITYUPSDNHLXAWMJQOFECK",
+        "JPGVOUMFYQBENHZRDKASXLICTW",
+        "NZJHGRCXMYSWBOUFAIVLPEKQDT",
+        "FKQHTLXOCBJSPDZRAMEWNIUYGV",
+        "LEYJVCNIXWPBQMDRTAKZGFUHOS",
+        "FSOKANUERHMBTIYCWLQPZXVGJD",
+    };
+
+    public static void RotorsValue() {
+        rotorsValue.addAll(List.of(rv));
     }
 
-    public ArrayList<String> getRotorsValue() {
-        return RotorsValue;
+    public static String getRotorsValue(int i) {
+        return rotorsValue.get(i);
     }
 }
