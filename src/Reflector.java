@@ -15,20 +15,24 @@ public class Reflector {
         reflectorValue.add("FVPJIAOYEDRZXWGCTKUQSBNMHL");
     }
 
-    public static String CodeToName(int reflectorCodeInput) {
+    public static String codeToName(int reflectorCodeInput) {
         return reflectorName.get(reflectorCodeInput);
     }
 
-    public static int NameToCode(String reflectorNameInput) {
+    public static int nameToCode(String reflectorNameInput) {
         return reflectorName.indexOf(reflectorNameInput);
     }
 
-    public void ChangeReflectorCode(int reflectorCode) {
+    public void changeReflectorCode(int reflectorCode) {
         this.reflectorCode = reflectorCode;
     }
 
-    public int GetReflectorCode() {
+    public int getReflectorCode() {
         return reflectorCode;
+    }
+
+    public char reflect(char c) {
+        return util.getReflectorValue(reflectorCode).charAt(util.c2i(c));
     }
 
 }

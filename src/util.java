@@ -7,8 +7,8 @@ public class util {
         List.of(new String[]{"I", "II", "III", "IV", "V", "VI", "VII", "VIII"})
     );
 
-    private static final ArrayList<String> rotorsStep = new ArrayList<>(
-        List.of(new String[]{"R", "F", "W", "K", "A", "N", "N", "N"})
+    private static final ArrayList<Character> rotorsStep = new ArrayList<>(
+        List.of(new Character[]{'R', 'F', 'W', 'K', 'A', 'N', 'N', 'N'})
     );
 
     private static final ArrayList<String> rotorsValue = new ArrayList<>(
@@ -37,32 +37,40 @@ public class util {
         })
     );
 
-    public static ArrayList<String> GetRotorName() {
+    public static ArrayList<String> getRotorName() {
         return rotorsName;
     }
 
-    public static String GetRotorName(int i) {
+    public static String getRotorName(int i) {
         return rotorsName.get(i);
     }
 
-    public static String GetRotorStep(int i) {
+    public static char getRotorStep(int i) {
         return rotorsStep.get(i);
     }
 
-    public static String GetRotorValue(int i) {
+    public static String getRotorValue(int i) {
         return rotorsValue.get(i);
     }
 
-    public static String GetReflectorName(int i) {
+    public static String getReflectorName(int i) {
         return reflectorName.get(i);
     }
 
-    public static String GetReflectorValue(int i) {
+    public static String getReflectorValue(int i) {
         return reflectorValue.get(i);
     }
 
     public static int c2i(char c) {
-        return ((int)c - 65);
+        return (int)c - 65;
+    }
+
+    public static char step(char c, int i) {
+        if (c + i > 90) {
+            return (char)(c + i - 26);
+        } else {
+            return (char)(c + i);
+        }
     }
 
 }

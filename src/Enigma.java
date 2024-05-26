@@ -1,86 +1,108 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Enigma {
 
-    private int rotorsAmount;
+    private int rotorsNumber;
 
     private ArrayList<Rotors> rotors = new ArrayList<>();
 
-    private ArrayList<Integer> rotorsStatue = new ArrayList<>(List.of(new Integer[]{0, 0, 0}));
+    private ArrayList<Character> rotorsStep = new ArrayList<>();
 
     private Reflector reflector = new Reflector(0);
 
     public Enigma() {
-        this.rotorsAmount = 3;
-        for (int i = 0; i < this.rotorsAmount; i++) {
+        this.rotorsNumber = 3;
+        for (int i = 0; i < this.rotorsNumber; i++) {
             rotors.add(new Rotors(i));
+            rotorsStep.add(rotors.get(i).getRotorStep());
         }
     }
 
-    public boolean ChangeRotors(int i, String rotorName) {
-        if (Rotors.NameToCode(rotorName) == -1) {
+    public boolean changeRotors(int i, String rotorName) {
+        if (Rotors.nameToCode(rotorName) == -1) {
             return false;
         } else {
-            this.rotors.set(i, new Rotors(Rotors.NameToCode(rotorName)));
+            rotors.set(i, new Rotors(Rotors.nameToCode(rotorName)));
+            rotorsStep.set(i, util.getRotorStep(Rotors.nameToCode(rotorName)));
             return true;
         }
     }
 
-    public void ChangeRotorsAmount(int rotorsAmount) {
-        this.rotorsAmount = rotorsAmount;
-        if (rotors.size() > rotorsAmount) {
-            rotors.subList(rotorsAmount, rotors.size()).clear();
+    public void changeRotorsNumber(int rotorsNumber) {
+        this.rotorsNumber = rotorsNumber;
+        if (rotors.size() > rotorsNumber) {
+            rotorsStep.subList(rotorsNumber, rotors.size()).clear();
+            rotors.subList(rotorsNumber, rotors.size()).clear();
         } else {
-            for (int i = rotors.size(); i < rotorsAmount; i++) {
+            for (int i = rotors.size(); i < rotorsNumber; i++) {
                 rotors.add(new Rotors(0));
+                rotorsStep.add(util.getRotorStep(0));
             }
         }
     }
 
-    public int GetRotorsAmount() {
-        return rotorsAmount;
+    public int getRotorsNumber() {
+        return rotorsNumber;
     }
 
-    public ArrayList<String> GetRotors() {
+    public ArrayList<String> getRotors() {
         ArrayList<String> rotors = new ArrayList<>();
         for (Rotors rotor : this.rotors) {
-            rotors.add(Rotors.CodeToName(rotor.GetRotorsCode()));
+            rotors.add(Rotors.codeToName(rotor.getRotorCode()));
         }
         return rotors;
     }
 
-    public ArrayList<Integer> GetRotorsInt() {
+    public ArrayList<Integer> getRotorsInt() {
         ArrayList<Integer> rotors = new ArrayList<>();
         for (Rotors rotor : this.rotors) {
-            rotors.add(rotor.GetRotorsCode());
+            rotors.add(rotor.getRotorCode());
         }
         return rotors;
     }
 
-    public ArrayList<Integer> GetRotorsIntReverse() {
+    public ArrayList<Character> getRotorsStep() {
+        return rotorsStep;
+    }
+
+    public ArrayList<Integer> getRotorsIntReverse() {
         ArrayList<Integer> rotors = new ArrayList<>();
         Collections.reverse(rotors);
         for (Rotors rotor : this.rotors) {
-            rotors.add(rotor.GetRotorsCode());
+            rotors.add(rotor.getRotorCode());
         }
         return rotors;
     }
 
-    public int GetReflector() {
-        return reflector.GetReflectorCode();
+    public int getReflector() {
+        return reflector.getReflectorCode();
     }
 
-    public String Encrypt(String input) {
+    public String encrypt(String input) {
         StringBuilder output = new StringBuilder();
+        ArrayList<Rotors> rotorsTemp = rotors;
         for (char c : input.toCharArray()) {
             if (c == ' ') {
                 output.append(c);
             } else {
-                for (int i : GetRotorsInt()) {
-
+                for (int i = 0; i < rotorsNumber; i++) {
+                    if (!rotors.get(i).step()) {
+                        break;
+                    }
                 }
+                for (Rotors r : rotorsTemp) {
+                    c = (char)(r.rotor(c) - util.c2i(r.getRotorStatue()));
+                }
+                System.out.println(c);
+                c = reflector.reflect(c);
+                System.out.println(c);
+                Collections.reverse(rotorsTemp);
+                for (Rotors r : rotorsTemp) {
+                    c = (char)(r.rotor(c) - util.c2i(r.getRotorStatue()));
+                }
+                output.append(c);
+                Collections.reverse(rotorsTemp);
             }
         }
         return output.toString();
