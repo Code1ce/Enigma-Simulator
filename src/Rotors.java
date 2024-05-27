@@ -6,9 +6,12 @@ public class Rotors {
 
     private char rotorStatue;
 
+    private String rotorValue;
+
     public Rotors(int rotorCode) {
         this.rotorCode = rotorCode;
         this.rotorStep = util.getRotorStep(rotorCode);
+        this.rotorValue = util.getRotorValue(rotorCode);
         this.rotorStatue = 'A';
     }
 
@@ -38,7 +41,11 @@ public class Rotors {
     }
 
     public char rotor(char c) {
-        return util.getRotorValue(rotorCode).charAt(util.c2i(util.step(c, util.c2i(rotorStatue))));
+        return rotorValue.charAt(util.c2i(util.step(c, util.c2i(rotorStatue))));
+    }
+
+    public char rotorBack(char c) {
+        return (char)rotorValue.indexOf(util.step(c, util.c2i(rotorStatue)));
     }
 
 }

@@ -99,7 +99,8 @@ public class Enigma {
                 System.out.println(c);
                 Collections.reverse(rotorsTemp);
                 for (Rotors r : rotorsTemp) {
-                    c = (char)(r.rotor(c) - util.c2i(r.getRotorStatue()));
+                    c = (char)(r.rotorBack(c) - util.c2i(r.getRotorStatue()));
+                    System.out.println(r.getRotorCode() + " " + c);
                 }
                 output.append(c);
                 Collections.reverse(rotorsTemp);
