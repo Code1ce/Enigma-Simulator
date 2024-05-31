@@ -45,7 +45,8 @@ public class Rotors {
     }
 
     public char rotorBack(char c) {
-        return (char)rotorValue.indexOf(util.step(c, util.c2i(rotorStatue)));
+        System.out.println(rotorValue.indexOf(util.step(c, util.c2i(rotorStatue))) + 65);
+        return (char)(rotorValue.indexOf(util.step(c, util.c2i(rotorStatue))) + 65);
     }
 
 }

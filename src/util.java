@@ -65,12 +65,24 @@ public class util {
         return (int)c - 65;
     }
 
-    public static char step(char c, int i) {
-        if (c + i > 90) {
-            return (char)(c + i - 26);
+    public static char charCalc(char c, int i, boolean add) {
+        if (add) {
+            if (c + i > 90) {
+                return (char)(c + i - 26);
+            } else {
+                return (char)(c + i);
+            }
         } else {
-            return (char)(c + i);
+            if (c - i < 65) {
+                return (char)(c - i + 26);
+            } else {
+                return (char)(c - i);
+            }
         }
+    }
+
+    public static char step(char c, int i) {
+        return charCalc(c, i, true);
     }
 
 }

@@ -92,15 +92,17 @@ public class Enigma {
                     }
                 }
                 for (Rotors r : rotorsTemp) {
-                    c = (char)(r.rotor(c) - util.c2i(r.getRotorStatue()));
+                    c = util.charCalc(r.rotor(c), util.c2i(r.getRotorStatue()), false);
                 }
-                System.out.println(c);
+//                System.out.println(c);
                 c = reflector.reflect(c);
-                System.out.println(c);
+//                System.out.println(c);
                 Collections.reverse(rotorsTemp);
                 for (Rotors r : rotorsTemp) {
-                    c = (char)(r.rotorBack(c) - util.c2i(r.getRotorStatue()));
-                    System.out.println(r.getRotorCode() + " " + c);
+                    c = util.charCalc(r.rotorBack(c), util.c2i(r.getRotorStatue()), false);
+                    System.out.println("c: " + c);
+                    System.out.println("c2i: " + util.c2i(c));
+//                    System.out.println(r.getRotorCode() + " " + c);
                 }
                 output.append(c);
                 Collections.reverse(rotorsTemp);
